@@ -1,911 +1,531 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thirumurthi 💍 Jeeva — Sacred Union</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Sacramento&family=Cinzel+Decorative:wght@400;700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Thirumurthi & Jeeva 💍</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
-/* ══════════════════════════════════════
-   RESET & ROOT
-══════════════════════════════════════ */
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-:root {
-  --rose:     #c9003b;
-  --blush:    #ff6b8a;
-  --gold:     #d4a843;
-  --deep-gold:#8b6914;
-  --ivory:    #fff8f0;
-  --cream:    #fdf4e7;
-  --wine:     #4a0018;
-  --velvet:   #1a000a;
-  --shadow:   rgba(0,0,0,0.7);
-}
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8d5a3;
+    --gold-pale: #f7f0df;
+    --rose: #b5617a;
+    --rose-light: #e8b4c2;
+    --cream: #fdf8f0;
+    --deep: #2a1f14;
+    --muted: #7a6655;
+  }
 
-html, body {
-  height: 100%;
-  width:  100%;
-  overflow: hidden;
-  background: #0d0006;
-  cursor: none;
-}
+  body {
+    background: var(--cream);
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--deep);
+  }
 
-/* ══════════════════════════════════════
-   CUSTOM CURSOR
-══════════════════════════════════════ */
-#cursor {
-  position: fixed;
-  width: 18px; height: 18px;
-  background: radial-gradient(circle, #ff6b8a, #c9003b);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%,-50%);
-  box-shadow: 0 0 12px #ff6b8a, 0 0 30px rgba(201,0,59,0.5);
-  transition: transform 0.08s;
-}
-#cursor-ring {
-  position: fixed;
-  width: 38px; height: 38px;
-  border: 1px solid rgba(212,168,67,0.6);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%,-50%);
-  transition: left 0.12s ease, top 0.12s ease;
-}
+  /* === BACKGROUND === */
+  .bg-layer {
+    position: fixed; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, #f7e8d2 0%, transparent 70%),
+      radial-gradient(ellipse 60% 80% at 0% 100%, #f2dfe8 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 100% 100%, #e8f0e0 0%, transparent 60%),
+      #fdf8f0;
+  }
 
-/* ══════════════════════════════════════
-   GLOBAL BG ATMOSPHERE
-══════════════════════════════════════ */
-.atm-layer {
-  position: fixed; inset: 0;
-  pointer-events: none;
-}
-#atm-base {
-  background:
-    radial-gradient(ellipse 60% 50% at 15% 80%, rgba(120,0,40,0.45) 0%, transparent 60%),
-    radial-gradient(ellipse 70% 60% at 85% 20%, rgba(80,0,25,0.35) 0%, transparent 55%),
-    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(50,0,15,0.4) 0%, transparent 70%),
-    #0d0006;
-  z-index: -10;
-}
-#atm-rays {
-  width: 200%; height: 200%;
-  top: -50%; left: -50%;
-  background: conic-gradient(from 0deg at 50% 50%,
-    transparent 0deg, rgba(180,0,50,0.035) 18deg, transparent 36deg,
-    transparent 72deg, rgba(212,168,67,0.025) 90deg, transparent 108deg,
-    transparent 144deg, rgba(180,0,50,0.03) 162deg, transparent 180deg,
-    transparent 216deg, rgba(212,168,67,0.02) 234deg, transparent 252deg,
-    transparent 288deg, rgba(180,0,50,0.03) 306deg, transparent 324deg,
-    transparent 360deg);
-  animation: raysSpin 90s linear infinite;
-  z-index: -9;
-}
-@keyframes raysSpin { to { transform: rotate(360deg); } }
-#atm-vignette {
-  background: radial-gradient(ellipse 85% 85% at 50% 50%, transparent 25%, rgba(0,0,0,0.92) 100%);
-  z-index: -8;
-}
+  .petals-bg {
+    position: fixed; inset: 0; z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
 
-/* Mandala rings */
-.m-ring {
-  position: fixed;
-  border-radius: 50%;
-  border-style: solid;
-  top: 50%; left: 50%;
-  transform: translate(-50%,-50%) rotate(0deg);
-  pointer-events: none;
-  z-index: -6;
-  animation: ringSpin linear infinite;
-}
-@keyframes ringSpin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+  .petal {
+    position: absolute;
+    width: 10px; height: 14px;
+    background: radial-gradient(ellipse, var(--rose-light), transparent);
+    border-radius: 50% 0 50% 0;
+    opacity: 0;
+    animation: fall linear infinite;
+  }
 
-/* ══════════════════════════════════════
-   FLOATING PARTICLES
-══════════════════════════════════════ */
-.prt {
-  position: fixed;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 1;
-  animation: prtRise linear infinite;
-}
-@keyframes prtRise {
-  0%   { transform: translateY(110vh) scale(0.4) rotate(0deg); opacity: 0; }
-  8%   { opacity: 1; }
-  92%  { opacity: 0.5; }
-  100% { transform: translateY(-10vh) scale(1.3) rotate(540deg); opacity: 0; }
-}
-.sym {
-  position: fixed;
-  pointer-events: none;
-  z-index: 1;
-  animation: symRise linear infinite;
-  filter: drop-shadow(0 0 8px currentColor);
-}
-@keyframes symRise {
-  0%   { transform: translateY(110vh) translateX(0px) scale(0.5); opacity: 0; }
-  6%   { opacity: 0.7; }
-  94%  { opacity: 0.25; }
-  100% { transform: translateY(-10vh) translateX(var(--sw,15px)) scale(1); opacity: 0; }
-}
+  @keyframes fall {
+    0%   { transform: translateY(-20px) rotate(0deg);   opacity: 0; }
+    10%  { opacity: 0.5; }
+    90%  { opacity: 0.3; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
 
-/* Screen corner flourishes */
-.scf {
-  position: fixed;
-  width: 160px; height: 160px;
-  pointer-events: none;
-  z-index: 5;
-  opacity: 0.55;
-}
-.scf.tl { top:0; left:0; }
-.scf.tr { top:0; right:0; transform: scaleX(-1); }
-.scf.bl { bottom:0; left:0; transform: scaleY(-1); }
-.scf.br { bottom:0; right:0; transform: scale(-1); }
+  /* === MAIN WRAPPER === */
+  .page {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 40px 20px;
+  }
 
-/* Thin frame lines */
-.frame-line {
-  position: fixed;
-  pointer-events: none;
-  z-index: 4;
-  background: linear-gradient(var(--dir), transparent, rgba(212,168,67,0.3) 40%, rgba(201,0,59,0.4) 60%, transparent);
-}
-.fl-top    { top:36px;    left:0; right:0; height:1px; --dir: to right; }
-.fl-bot    { bottom:36px; left:0; right:0; height:1px; --dir: to right; }
-.fl-left   { left:36px;   top:0; bottom:0; width:1px;  --dir: to bottom; }
-.fl-right  { right:36px;  top:0; bottom:0; width:1px;  --dir: to bottom; }
+  /* === CARD === */
+  .card {
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(201,168,76,0.35);
+    border-radius: 24px;
+    padding: 60px 50px 50px;
+    max-width: 540px; width: 100%;
+    text-align: center;
+    box-shadow:
+      0 0 0 1px rgba(201,168,76,0.15),
+      0 8px 40px rgba(42,31,20,0.12),
+      0 2px 8px rgba(201,168,76,0.12);
+    position: relative;
+    overflow: hidden;
+  }
 
-/* ══════════════════════════════════════
-   PAGES
-══════════════════════════════════════ */
-.page {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 1.2s cubic-bezier(0.4,0,0.2,1), transform 1.2s cubic-bezier(0.4,0,0.2,1);
-  transform: scale(1.04);
-  z-index: 20;
-}
-.page.active {
-  opacity: 1;
-  pointer-events: auto;
-  transform: scale(1);
-}
-.page.exit {
-  opacity: 0;
-  transform: scale(0.96);
-}
+  .card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(201,168,76,0.06), transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(181,97,122,0.06), transparent 50%);
+    pointer-events: none;
+  }
 
-/* ══════════════════════════════════════
-   CARD BASE
-══════════════════════════════════════ */
-.card {
-  position: relative;
-  width: min(560px, 92vw);
-  background: rgba(10,0,5,0.78);
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
-  border-radius: 3px;
-  overflow: hidden;
-  box-shadow:
-    0 0 0 1px rgba(212,168,67,0.5),
-    0 0 0 3px rgba(201,0,59,0.18),
-    0 0 0 6px rgba(212,168,67,0.08),
-    0 0 60px rgba(180,0,50,0.35),
-    0 0 120px rgba(150,0,40,0.15),
-    0 40px 100px rgba(0,0,0,0.95);
-}
+  /* Corner ornaments */
+  .corner {
+    position: absolute;
+    width: 60px; height: 60px;
+    opacity: 0.4;
+  }
+  .corner svg { width: 100%; height: 100%; }
+  .corner.tl { top: 14px; left: 14px; }
+  .corner.tr { top: 14px; right: 14px; transform: scaleX(-1); }
+  .corner.bl { bottom: 14px; left: 14px; transform: scaleY(-1); }
+  .corner.br { bottom: 14px; right: 14px; transform: scale(-1,-1); }
 
-.card-bar-top {
-  height: 4px;
-  background: linear-gradient(to right, #4a0018, #8b6914, #d4a843, #ff6b8a, #d4a843, #8b6914, #4a0018);
-  background-size: 200% 100%;
-  animation: barShift 5s linear infinite;
-}
-.card-bar-bot {
-  height: 4px;
-  background: linear-gradient(to right, #4a0018, #8b6914, #d4a843, #ff6b8a, #d4a843, #8b6914, #4a0018);
-  background-size: 200% 100%;
-  animation: barShift 5s linear infinite reverse;
-}
-@keyframes barShift { to { background-position: 200% 0; } }
+  /* === SECTIONS (screens) === */
+  .screen { display: none; animation: fadeIn 0.7s ease both; }
+  .screen.active { display: block; }
 
-.card-inner {
-  padding: 44px 48px 38px;
-  position: relative;
-}
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 
-/* Card corner ornaments */
-.cc {
-  position: absolute;
-  width: 54px; height: 54px;
-  pointer-events: none;
-  opacity: 0.55;
-}
-.cc.tl { top:8px; left:8px; }
-.cc.tr { top:8px; right:8px; transform: scaleX(-1); }
-.cc.bl { bottom:8px; left:8px; transform: scaleY(-1); }
-.cc.br { bottom:8px; right:8px; transform: scale(-1); }
+  /* === DIVIDER === */
+  .divider {
+    display: flex; align-items: center; gap: 12px;
+    margin: 28px auto; max-width: 280px;
+  }
+  .divider-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); }
+  .divider-icon { color: var(--gold); font-size: 14px; }
 
-/* ══════════════════════════════════════
-   ORNAMENTAL HEADER
-══════════════════════════════════════ */
-.orn-header {
-  text-align: center;
-  margin-bottom: 22px;
-}
-.orn-header .sup-label {
-  font-family: 'Cinzel Decorative', serif;
-  font-size: 9px;
-  letter-spacing: 8px;
-  color: rgba(212,168,67,0.6);
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: 10px;
-}
-.orn-row {
-  display: flex; align-items: center; justify-content: center;
-  gap: 10px; margin: 6px 0;
-}
-.orn-line {
-  flex: 1; height: 1px;
-  background: linear-gradient(var(--d), rgba(212,168,67,0.5), transparent);
-}
-.orn-line.l { --d: to right; }
-.orn-line.r { --d: to left; }
-.orn-gem {
-  font-size: 18px;
-  filter: drop-shadow(0 0 10px gold);
-  animation: gemTwinkle 2.5s ease-in-out infinite alternate;
-}
-@keyframes gemTwinkle { 0%{ transform:scale(0.85); opacity:0.6; } 100%{ transform:scale(1.15); opacity:1; } }
+  /* === LOCK SCREEN === */
+  .lock-icon { font-size: 44px; margin-bottom: 12px; animation: floatIcon 3s ease-in-out infinite; }
+  @keyframes floatIcon { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
 
-/* ══════════════════════════════════════
-   PAGE 1 — LOGIN
-══════════════════════════════════════ */
-.heading-main {
-  font-family: 'Sacramento', cursive;
-  font-size: clamp(44px, 10vw, 68px);
-  line-height: 1.1;
-  color: #ffeef3;
-  text-align: center;
-  text-shadow: 0 0 30px rgba(255,100,140,0.55), 0 0 80px rgba(180,0,60,0.35);
-  animation: nameGlow 3.5s ease-in-out infinite alternate;
-  margin-bottom: 4px;
-}
-@keyframes nameGlow {
-  0%  { text-shadow: 0 0 25px rgba(255,100,140,0.4), 0 0 60px rgba(180,0,60,0.25); }
-  100%{ text-shadow: 0 0 55px rgba(255,130,160,0.85), 0 0 130px rgba(200,0,60,0.5), 0 0 200px rgba(255,0,80,0.18); }
-}
-.amp {
-  font-family: 'IM Fell English', serif;
-  font-style: italic;
-  font-size: 20px;
-  color: rgba(212,168,67,0.8);
-  display: block;
-  letter-spacing: 6px;
-  text-align: center;
-  margin: 0 0 2px;
-}
-.date-label {
-  font-family: 'Cinzel Decorative', serif;
-  font-size: 10px;
-  letter-spacing: 6px;
-  color: rgba(212,168,67,0.55);
-  text-align: center;
-  margin: 8px 0 26px;
-}
+  .lock-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.6rem; color: var(--rose);
+    line-height: 1.1;
+    text-shadow: 0 2px 8px rgba(181,97,122,0.2);
+  }
 
-/* Lock icon */
-.lock-wrap {
-  text-align: center;
-  margin-bottom: 18px;
-}
-.lock-icon-anim {
-  font-size: 36px;
-  display: inline-block;
-  animation: lockBeat 2.8s ease-in-out infinite;
-  filter: drop-shadow(0 0 12px rgba(255,100,140,0.6));
-}
-@keyframes lockBeat {
-  0%,100% { transform: scale(1) rotate(-3deg); }
-  50%      { transform: scale(1.12) rotate(3deg); filter: drop-shadow(0 0 22px rgba(255,100,140,0.9)); }
-}
+  .lock-sub {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); margin-top: 6px;
+  }
 
-/* Input */
-.input-shell {
-  position: relative;
-  width: 82%; margin: 0 auto 16px;
-  display: flex;
-}
-.input-shell::before, .input-shell::after {
-  content: '✦';
-  position: absolute; top: 50%; transform: translateY(-50%);
-  color: rgba(212,168,67,0.4); font-size: 11px; pointer-events: none;
-}
-.input-shell::before { left: 14px; }
-.input-shell::after  { right: 14px; }
+  .input-wrap { position: relative; margin-top: 28px; }
+  .password-input {
+    width: 100%;
+    padding: 14px 50px 14px 20px;
+    border: 1.5px solid var(--gold-light);
+    border-radius: 50px;
+    background: rgba(255,255,255,0.7);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem; color: var(--deep);
+    letter-spacing: 0.05em;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .password-input::placeholder { color: var(--gold-light); }
+  .password-input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 4px rgba(201,168,76,0.1);
+  }
 
-input[type="password"] {
-  width: 100%;
-  padding: 14px 36px;
-  background: rgba(60,0,20,0.5);
-  border: 1px solid rgba(212,168,67,0.3);
-  border-radius: 2px;
-  color: #ffeef3;
-  font-family: 'Cinzel Decorative', serif;
-  font-size: 12px;
-  letter-spacing: 5px;
-  text-align: center;
-  outline: none;
-  transition: border-color 0.3s, box-shadow 0.3s;
-  box-shadow: 0 0 20px rgba(180,0,50,0.1) inset;
-}
-input[type="password"]::placeholder {
-  color: rgba(255,180,180,0.3);
-  font-size: 10px; letter-spacing: 4px;
-}
-input[type="password"]:focus {
-  border-color: rgba(212,168,67,0.65);
-  box-shadow: 0 0 0 1px rgba(212,168,67,0.2), 0 0 40px rgba(255,80,120,0.18) inset, 0 0 25px rgba(212,168,67,0.15);
-}
+  .eye-btn {
+    position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+    background: none; border: none; cursor: pointer;
+    font-size: 18px; color: var(--muted); padding: 4px;
+  }
 
-/* Buttons */
-.btn-primary {
-  display: block;
-  width: 82%; margin: 0 auto 8px;
-  padding: 14px 24px;
-  background: linear-gradient(135deg, #6e001c 0%, #aa0028 45%, #d4003a 65%, #6e001c 100%);
-  background-size: 200% 100%;
-  border: none;
-  border-radius: 2px;
-  color: #ffeef3;
-  font-family: 'Cinzel Decorative', serif;
-  font-size: 10px;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  cursor: none;
-  position: relative; overflow: hidden;
-  box-shadow: 0 0 0 1px rgba(212,168,67,0.35), 0 0 35px rgba(180,0,50,0.4);
-  transition: box-shadow 0.3s, transform 0.2s;
-}
-.btn-primary::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(105deg, transparent 42%, rgba(255,255,255,0.07) 50%, transparent 58%);
-  transform: translateX(-100%);
-  transition: transform 0.55s;
-}
-.btn-primary:hover::before { transform: translateX(100%); }
-.btn-primary:hover {
-  box-shadow: 0 0 0 1px rgba(212,168,67,0.6), 0 0 60px rgba(220,0,60,0.55);
-  transform: translateY(-1px);
-}
-.btn-primary:active { transform: translateY(1px); }
+  .enter-btn {
+    margin-top: 16px;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--gold) 0%, #d4a855 50%, var(--gold) 100%);
+    background-size: 200% 100%;
+    color: #fff;
+    border: none; border-radius: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(201,168,76,0.4);
+    transition: transform 0.2s, box-shadow 0.2s, background-position 0.5s;
+  }
+  .enter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(201,168,76,0.5);
+    background-position: 100% 0;
+  }
+  .enter-btn:active { transform: translateY(0); }
 
-.btn-group {
-  display: flex; gap: 12px;
-  width: 82%; margin: 0 auto;
-}
-.btn-yes, .btn-no {
-  flex: 1; padding: 14px 10px;
-  border: none; border-radius: 2px;
-  font-family: 'Cinzel Decorative', serif;
-  font-size: 10px; letter-spacing: 4px;
-  cursor: none; position: relative; overflow: hidden;
-  transition: all 0.3s;
-}
-.btn-yes {
-  background: linear-gradient(135deg, #1a5c20, #2e8b35, #1a5c20);
-  color: #d4f5d8;
-  box-shadow: 0 0 0 1px rgba(100,200,100,0.3), 0 0 30px rgba(30,130,40,0.35);
-}
-.btn-no {
-  background: linear-gradient(135deg, #6e001c, #aa0028, #6e001c);
-  color: #ffd4dc;
-  box-shadow: 0 0 0 1px rgba(212,168,67,0.25), 0 0 30px rgba(180,0,50,0.3);
-}
-.btn-yes:hover { box-shadow: 0 0 0 1px rgba(100,200,100,0.6), 0 0 50px rgba(30,130,40,0.55); transform: translateY(-2px); }
-.btn-no:hover  { box-shadow: 0 0 0 1px rgba(212,168,67,0.5), 0 0 50px rgba(200,0,50,0.5); transform: translateY(-2px); }
+  .error-msg {
+    margin-top: 12px; font-size: 0.78rem;
+    color: var(--rose); opacity: 0;
+    transition: opacity 0.3s;
+    letter-spacing: 0.05em;
+  }
+  .error-msg.show { opacity: 1; }
 
-/* Error */
-.err-msg {
-  font-family: 'IM Fell English', serif;
-  font-style: italic;
-  font-size: 13px;
-  color: rgba(255,160,160,0.8);
-  text-align: center;
-  min-height: 22px;
-  margin-top: 10px;
-  text-shadow: 0 0 10px rgba(255,0,0,0.4);
-  letter-spacing: 2px;
-}
+  /* === PROMISE SCREEN === */
+  .promise-icon { font-size: 50px; animation: pulse 2.5s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
 
-/* Swash divider */
-.swash {
-  display: flex; align-items: center; justify-content: center;
-  gap: 10px; margin: 18px 0;
-}
-.swash::before, .swash::after {
-  content: '';
-  flex: 1; height: 1px;
-}
-.swash::before { background: linear-gradient(to right, transparent, rgba(212,168,67,0.4)); }
-.swash::after  { background: linear-gradient(to left,  transparent, rgba(212,168,67,0.4)); }
-.swash span { font-size: 16px; animation: gemTwinkle 2s ease-in-out infinite alternate; }
+  .promise-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.8rem; color: var(--gold);
+    margin-top: 10px;
+    text-shadow: 0 2px 8px rgba(201,168,76,0.3);
+  }
 
-/* ══════════════════════════════════════
-   PAGE 2 — CONSENT
-══════════════════════════════════════ */
-.question-label {
-  font-family: 'Cinzel Decorative', serif;
-  font-size: 8px;
-  letter-spacing: 7px;
-  color: rgba(212,168,67,0.55);
-  text-align: center;
-  display: block;
-  margin-bottom: 10px;
-}
-.question-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: clamp(20px, 4vw, 28px);
-  color: #ffeef3;
-  text-align: center;
-  text-shadow: 0 0 20px rgba(255,100,140,0.35);
-  margin-bottom: 28px;
-  line-height: 1.5;
-}
-.section-icon {
-  font-size: 44px;
-  display: block;
-  text-align: center;
-  margin-bottom: 16px;
-  animation: iconFloat 3s ease-in-out infinite;
-  filter: drop-shadow(0 0 14px rgba(255,100,140,0.7));
-}
-@keyframes iconFloat {
-  0%,100% { transform: translateY(0) rotate(-3deg); }
-  50%      { transform: translateY(-8px) rotate(3deg); }
-}
+  .promise-names {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; color: var(--deep);
+    font-style: italic; margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
 
-/* ══════════════════════════════════════
-   PAGE 3 — FINAL BLESSING
-══════════════════════════════════════ */
-.blessing-names {
-  font-family: 'Sacramento', cursive;
-  font-size: clamp(42px, 9vw, 66px);
-  color: #ffeef3;
-  text-align: center;
-  line-height: 1.15;
-  text-shadow: 0 0 40px rgba(255,120,150,0.65), 0 0 100px rgba(200,0,60,0.4);
-  animation: nameGlow 3s ease-in-out infinite alternate;
-  margin-bottom: 6px;
-}
-.blessing-ring {
-  display: flex; align-items: center; justify-content: center;
-  gap: 12px; margin: 10px 0 18px;
-}
-.blessing-ring span { font-size: 20px; animation: gemTwinkle 2s ease-in-out infinite alternate; }
+  .promise-question {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; color: var(--muted);
+    margin-top: 22px; line-height: 1.7;
+    font-style: italic;
+  }
 
-.blessing-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: clamp(15px, 2.5vw, 19px);
-  color: rgba(255,220,210,0.88);
-  text-align: center;
-  line-height: 2;
-  text-shadow: 0 0 15px rgba(255,100,120,0.25);
-}
-.blessing-text strong {
-  color: #ffeef3;
-  font-style: normal;
-}
+  .btn-row {
+    display: flex; gap: 16px; margin-top: 32px;
+    justify-content: center;
+  }
 
-.confetti-burst {
-  position: fixed; inset: 0;
-  pointer-events: none;
-  z-index: 50;
-}
+  .btn-yes, .btn-no {
+    flex: 1; max-width: 180px;
+    padding: 14px 10px;
+    border-radius: 50px; border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem; font-weight: 500;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-yes {
+    background: linear-gradient(135deg, var(--rose), #c4566e);
+    color: #fff;
+    box-shadow: 0 4px 18px rgba(181,97,122,0.38);
+  }
+  .btn-yes:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(181,97,122,0.45); }
 
-/* ══════════════════════════════════════
-   SPARKS
-══════════════════════════════════════ */
-.spark {
-  position: fixed;
-  pointer-events: none;
-  z-index: 100;
-  animation: sparkFly var(--dur, 1.5s) cubic-bezier(0.15,0.9,0.1,1) forwards;
-}
-@keyframes sparkFly {
-  0%   { opacity:1; transform:translate(0,0) scale(1.2) rotate(0deg); }
-  70%  { opacity:0.8; }
-  100% { opacity:0; transform:translate(var(--tx),var(--ty)) scale(0.1) rotate(var(--tr,360deg)); }
-}
+  .btn-no {
+    background: transparent;
+    border: 1.5px solid var(--gold-light);
+    color: var(--muted);
+  }
+  .btn-no:hover { background: var(--gold-pale); transform: translateY(-3px); }
 
-/* Progress strip (page indicator) */
-.page-indicator {
-  position: fixed;
-  bottom: 50px; left: 50%; transform: translateX(-50%);
-  display: flex; gap: 10px;
-  z-index: 30;
-  pointer-events: none;
-}
-.pi-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: rgba(212,168,67,0.25);
-  transition: all 0.5s;
-  box-shadow: none;
-}
-.pi-dot.active {
-  background: rgba(212,168,67,0.9);
-  box-shadow: 0 0 10px rgba(212,168,67,0.7);
-  transform: scale(1.3);
-}
+  /* === CELEBRATION SCREEN === */
+  .celebration-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 18px;
+    background: linear-gradient(135deg, var(--gold-pale), rgba(201,168,76,0.15));
+    border: 1px solid var(--gold-light);
+    border-radius: 50px; margin-bottom: 20px;
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .celebration-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3.4rem;
+    background: linear-gradient(135deg, var(--gold), var(--rose), var(--gold));
+    background-size: 200% 100%;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 4s ease infinite;
+    line-height: 1.1;
+  }
+
+  @keyframes shimmer {
+    0%,100%{ background-position: 0% 50% }
+    50%{ background-position: 100% 50% }
+  }
+
+  .celebration-message {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; color: var(--muted);
+    line-height: 1.8; margin-top: 16px;
+    font-style: italic;
+  }
+
+  .names-display {
+    margin-top: 32px;
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+  }
+  .name-block {
+    text-align: center;
+  }
+  .name-big {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.4rem; color: var(--deep);
+    line-height: 1;
+  }
+  .name-role {
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-top: 4px;
+  }
+  .heart-connector {
+    font-size: 28px; color: var(--rose);
+    animation: heartbeat 1.4s ease-in-out infinite;
+  }
+  @keyframes heartbeat {
+    0%,100%{transform:scale(1)} 14%{transform:scale(1.2)} 28%{transform:scale(1)} 42%{transform:scale(1.15)} 70%{transform:scale(1)}
+  }
+
+  .rings {
+    font-size: 40px; margin: 24px 0 8px;
+    display: block;
+    animation: floatIcon 3s ease-in-out infinite;
+  }
+
+  .footer-date {
+    margin-top: 24px;
+    font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); opacity: 0.8;
+  }
+
+  /* === CONFETTI === */
+  .confetti-piece {
+    position: fixed;
+    width: 8px; height: 8px;
+    border-radius: 2px;
+    opacity: 0;
+    pointer-events: none;
+    animation: confettiFall 3.5s ease-in forwards;
+    z-index: 999;
+  }
+  @keyframes confettiFall {
+    0%   { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* Responsive */
+  @media (max-width: 500px) {
+    .card { padding: 44px 28px 36px; }
+    .celebration-title { font-size: 2.6rem; }
+    .name-big { font-size: 2rem; }
+  }
 </style>
 </head>
 <body>
 
-<!-- Custom cursor -->
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
+<div class="bg-layer"></div>
+<div class="petals-bg" id="petals"></div>
 
-<!-- Atmosphere -->
-<div class="atm-layer" id="atm-base"></div>
-<div class="atm-layer" id="atm-rays" style="position:fixed;"></div>
-<div class="atm-layer" id="atm-vignette"></div>
-
-<!-- Mandala rings -->
-<div class="m-ring" style="width:750px;height:750px;border:1px solid;border-color:rgba(212,168,67,0.06) rgba(201,0,59,0.12) rgba(212,168,67,0.06) rgba(201,0,59,0.12);animation-duration:100s;"></div>
-<div class="m-ring" style="width:620px;height:620px;border:1px solid;border-color:transparent rgba(255,100,140,0.15) transparent rgba(212,168,67,0.1);animation-duration:70s;animation-direction:reverse;"></div>
-<div class="m-ring" style="width:500px;height:500px;border:1px solid;border-color:rgba(180,0,50,0.12) transparent rgba(212,168,67,0.1) transparent;animation-duration:50s;"></div>
-<div class="m-ring" style="width:390px;height:390px;border:1px solid;border-color:rgba(212,168,67,0.1) rgba(201,0,59,0.15) rgba(212,168,67,0.1) rgba(201,0,59,0.15);animation-duration:35s;animation-direction:reverse;"></div>
-
-<!-- Screen corners -->
-<div class="scf tl">
-  <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M8,152 L8,8 L152,8" stroke="rgba(212,168,67,0.28)" stroke-width="1"/>
-    <path d="M8,8 Q32,8 32,32" stroke="rgba(201,0,59,0.35)" stroke-width="1" fill="none"/>
-    <circle cx="8" cy="8" r="4" fill="rgba(212,168,67,0.5)"/>
-    <circle cx="8" cy="8" r="9" stroke="rgba(212,168,67,0.2)" stroke-width="0.5" fill="none"/>
-    <line x1="8" y1="50" x2="8" y2="72" stroke="rgba(212,168,67,0.18)" stroke-width="0.8"/>
-    <line x1="8" y1="84" x2="8" y2="106" stroke="rgba(212,168,67,0.18)" stroke-width="0.8"/>
-    <line x1="50" y1="8" x2="72" y2="8" stroke="rgba(212,168,67,0.18)" stroke-width="0.8"/>
-    <line x1="84" y1="8" x2="106" y2="8" stroke="rgba(212,168,67,0.18)" stroke-width="0.8"/>
-    <text x="18" y="28" fill="rgba(201,0,59,0.45)" font-size="11" font-family="serif">✦</text>
-    <text x="26" y="14" fill="rgba(212,168,67,0.35)" font-size="9" font-family="serif">❧</text>
-  </svg>
-</div>
-<div class="scf tr"><svg viewBox="0 0 160 160" fill="none"><path d="M8,152 L8,8 L152,8" stroke="rgba(212,168,67,0.28)" stroke-width="1"/><path d="M8,8 Q32,8 32,32" stroke="rgba(201,0,59,0.35)" stroke-width="1" fill="none"/><circle cx="8" cy="8" r="4" fill="rgba(212,168,67,0.5)"/><text x="18" y="28" fill="rgba(201,0,59,0.45)" font-size="11" font-family="serif">✦</text></svg></div>
-<div class="scf bl"><svg viewBox="0 0 160 160" fill="none"><path d="M8,152 L8,8 L152,8" stroke="rgba(212,168,67,0.28)" stroke-width="1"/><path d="M8,8 Q32,8 32,32" stroke="rgba(201,0,59,0.35)" stroke-width="1" fill="none"/><circle cx="8" cy="8" r="4" fill="rgba(212,168,67,0.5)"/><text x="18" y="28" fill="rgba(201,0,59,0.45)" font-size="11" font-family="serif">✦</text></svg></div>
-<div class="scf br"><svg viewBox="0 0 160 160" fill="none"><path d="M8,152 L8,8 L152,8" stroke="rgba(212,168,67,0.28)" stroke-width="1"/><path d="M8,8 Q32,8 32,32" stroke="rgba(201,0,59,0.35)" stroke-width="1" fill="none"/><circle cx="8" cy="8" r="4" fill="rgba(212,168,67,0.5)"/><text x="18" y="28" fill="rgba(201,0,59,0.45)" font-size="11" font-family="serif">✦</text></svg></div>
-
-<!-- Frame lines -->
-<div class="frame-line fl-top"></div>
-<div class="frame-line fl-bot"></div>
-<div class="frame-line fl-left"></div>
-<div class="frame-line fl-right"></div>
-
-<!-- Page Indicator -->
-<div class="page-indicator">
-  <div class="pi-dot active" id="dot0"></div>
-  <div class="pi-dot" id="dot1"></div>
-  <div class="pi-dot" id="dot2"></div>
-</div>
-
-<!-- ══════════════════════════════════════
-     PAGE 1 — LOGIN
-══════════════════════════════════════ -->
-<div class="page active" id="page1">
+<div class="page">
   <div class="card">
-    <div class="card-bar-top"></div>
-    <div class="card-inner">
-      <!-- Card corner ornaments -->
-      <div class="cc tl"><svg viewBox="0 0 54 54" fill="none"><path d="M4,50 L4,4 L50,4" stroke="rgba(212,168,67,0.3)" stroke-width="1"/><circle cx="4" cy="4" r="2.5" fill="rgba(212,168,67,0.45)"/><path d="M4,4 Q15,4 15,15" stroke="rgba(201,0,59,0.3)" stroke-width="0.8" fill="none"/></svg></div>
-      <div class="cc tr"><svg viewBox="0 0 54 54" fill="none"><path d="M4,50 L4,4 L50,4" stroke="rgba(212,168,67,0.3)" stroke-width="1"/><circle cx="4" cy="4" r="2.5" fill="rgba(212,168,67,0.45)"/><path d="M4,4 Q15,4 15,15" stroke="rgba(201,0,59,0.3)" stroke-width="0.8" fill="none"/></svg></div>
-      <div class="cc bl"><svg viewBox="0 0 54 54" fill="none"><path d="M4,50 L4,4 L50,4" stroke="rgba(212,168,67,0.3)" stroke-width="1"/><circle cx="4" cy="4" r="2.5" fill="rgba(212,168,67,0.45)"/></svg></div>
-      <div class="cc br"><svg viewBox="0 0 54 54" fill="none"><path d="M4,50 L4,4 L50,4" stroke="rgba(212,168,67,0.3)" stroke-width="1"/><circle cx="4" cy="4" r="2.5" fill="rgba(212,168,67,0.45)"/></svg></div>
 
-      <div class="orn-header">
-        <span class="sup-label">Sacred Union</span>
-        <div class="orn-row">
-          <div class="orn-line l"></div>
-          <span class="orn-gem">💍</span>
-          <span class="orn-gem" style="font-size:14px;color:rgba(212,168,67,0.7);">✦</span>
-          <span class="orn-gem">❤️‍🔥</span>
-          <span class="orn-gem" style="font-size:14px;color:rgba(212,168,67,0.7);">✦</span>
-          <span class="orn-gem">💍</span>
-          <div class="orn-line r"></div>
-        </div>
-        <span class="sup-label">Wedding Revelation</span>
+    <!-- Corner ornaments -->
+    <div class="corner tl"><svg viewBox="0 0 60 60" fill="none"><path d="M2 58 Q2 2 58 2" stroke="#c9a84c" stroke-width="1.2" fill="none"/><path d="M2 40 Q2 2 40 2" stroke="#c9a84c" stroke-width="0.7" fill="none" opacity=".5"/><circle cx="2" cy="2" r="2.5" fill="#c9a84c"/><circle cx="58" cy="2" r="1.5" fill="#c9a84c" opacity=".5"/><circle cx="2" cy="58" r="1.5" fill="#c9a84c" opacity=".5"/></svg></div>
+    <div class="corner tr"><svg viewBox="0 0 60 60" fill="none"><path d="M2 58 Q2 2 58 2" stroke="#c9a84c" stroke-width="1.2" fill="none"/><path d="M2 40 Q2 2 40 2" stroke="#c9a84c" stroke-width="0.7" fill="none" opacity=".5"/><circle cx="2" cy="2" r="2.5" fill="#c9a84c"/><circle cx="58" cy="2" r="1.5" fill="#c9a84c" opacity=".5"/><circle cx="2" cy="58" r="1.5" fill="#c9a84c" opacity=".5"/></svg></div>
+    <div class="corner bl"><svg viewBox="0 0 60 60" fill="none"><path d="M2 58 Q2 2 58 2" stroke="#c9a84c" stroke-width="1.2" fill="none"/><path d="M2 40 Q2 2 40 2" stroke="#c9a84c" stroke-width="0.7" fill="none" opacity=".5"/><circle cx="2" cy="2" r="2.5" fill="#c9a84c"/><circle cx="58" cy="2" r="1.5" fill="#c9a84c" opacity=".5"/><circle cx="2" cy="58" r="1.5" fill="#c9a84c" opacity=".5"/></svg></div>
+    <div class="corner br"><svg viewBox="0 0 60 60" fill="none"><path d="M2 58 Q2 2 58 2" stroke="#c9a84c" stroke-width="1.2" fill="none"/><path d="M2 40 Q2 2 40 2" stroke="#c9a84c" stroke-width="0.7" fill="none" opacity=".5"/><circle cx="2" cy="2" r="2.5" fill="#c9a84c"/><circle cx="58" cy="2" r="1.5" fill="#c9a84c" opacity=".5"/><circle cx="2" cy="58" r="1.5" fill="#c9a84c" opacity=".5"/></svg></div>
+
+    <!-- ===== SCREEN 1: Password ===== -->
+    <div class="screen active" id="screen-lock">
+      <div class="lock-icon">💌</div>
+      <div class="lock-title">A Sacred Moment</div>
+      <p class="lock-sub">Enter to witness their love</p>
+
+      <div class="divider">
+        <div class="divider-line"></div>
+        <div class="divider-icon">✦</div>
+        <div class="divider-line"></div>
       </div>
 
-      <div class="heading-main">Thirumurthi</div>
-      <span class="amp">❧ &amp; ❧</span>
-      <div class="heading-main">Jeeva</div>
-      <div class="date-label">✦ &nbsp; 15 · February · 2026 &nbsp; ✦</div>
-
-      <div class="swash"><span>🌹</span><span>✦</span><span>🌸</span><span>✦</span><span>🌹</span></div>
-
-      <div class="lock-wrap">
-        <span class="lock-icon-anim">🔐</span>
+      <div class="input-wrap">
+        <input class="password-input" type="password" id="pwInput" placeholder="Enter wedding password…" />
+        <button class="eye-btn" id="eyeBtn" title="Show/Hide">👁</button>
       </div>
-
-      <div class="input-shell">
-        <input type="password" id="pass" placeholder="Enter the Secret Date" autocomplete="off"
-               onkeydown="if(event.key==='Enter')login()">
-      </div>
-
-      <button class="btn-primary" onclick="login()">✦ &nbsp; Unveil The Vow &nbsp; ✦</button>
-      <p class="err-msg" id="err1"></p>
+      <button class="enter-btn" onclick="checkPassword()">Enter ✦</button>
+      <div class="error-msg" id="errorMsg">✦ Incorrect password, dear guest ✦</div>
     </div>
-    <div class="card-bar-bot"></div>
-  </div>
-</div>
 
-<!-- ══════════════════════════════════════
-     PAGE 2 — CONSENT (split: groom / bride)
-══════════════════════════════════════ -->
-<div class="page" id="page2">
-  <div class="card">
-    <div class="card-bar-top"></div>
-    <div class="card-inner">
-      <div class="cc tl"><svg viewBox="0 0 54 54" fill="none"><path d="M4,50 L4,4 L50,4" stroke="rgba(212,168,67,0.3)" stroke-width="1"/><circle cx="4" cy="4" r="2.5" fill="rgba(212,168,67,0.45)"/></svg></div>
-      <div class="cc tr"><svg viewBox="0 0 54 54" fill="none"><path d="M4,50 L4,4 L50,4" stroke="rgba(212,168,67,0.3)" stroke-width="1"/><circle cx="4" cy="4" r="2.5" fill="rgba(212,168,67,0.45)"/></svg></div>
-      <div class="cc bl"><svg viewBox="0 0 54 54" fill="none"><path d="M4,50 L4,4 L50,4" stroke="rgba(212,168,67,0.3)" stroke-width="1"/><circle cx="4" cy="4" r="2.5" fill="rgba(212,168,67,0.45)"/></svg></div>
-      <div class="cc br"><svg viewBox="0 0 54 54" fill="none"><path d="M4,50 L4,4 L50,4" stroke="rgba(212,168,67,0.3)" stroke-width="1"/><circle cx="4" cy="4" r="2.5" fill="rgba(212,168,67,0.45)"/></svg></div>
+    <!-- ===== SCREEN 2: Promise ===== -->
+    <div class="screen" id="screen-promise">
+      <div class="promise-icon">💍</div>
+      <div class="promise-title">A Sacred Promise</div>
+      <div class="promise-names">Thirumurthi &amp; Jeeva</div>
 
-      <!-- GROOM SECTION -->
-      <div id="groomSection">
-        <div class="orn-header">
-          <span class="sup-label">For The Groom</span>
-          <div class="orn-row">
-            <div class="orn-line l"></div>
-            <span class="orn-gem" style="font-size:14px;color:rgba(212,168,67,0.7);">✦</span>
-            <span class="orn-gem">🤵</span>
-            <span class="orn-gem" style="font-size:14px;color:rgba(212,168,67,0.7);">✦</span>
-            <div class="orn-line r"></div>
-          </div>
-        </div>
-        <span class="section-icon">💍</span>
-        <span class="question-label">Sacred Vow</span>
-        <p class="question-text">Thirumurthi, do you take Jeeva<br>as your beloved wife,<br>now and forever?</p>
-        <div class="swash"><span>🌹</span><span>✦</span><span>🌹</span></div>
-        <div class="btn-group">
-          <button class="btn-yes" onclick="groomYes()">✦ Yes, I Do 💍</button>
-          <button class="btn-no"  onclick="sayNo()">No, I Don't</button>
-        </div>
+      <div class="divider">
+        <div class="divider-line"></div>
+        <div class="divider-icon">♡</div>
+        <div class="divider-line"></div>
       </div>
 
-      <!-- BRIDE SECTION -->
-      <div id="brideSection" style="display:none;">
-        <div class="orn-header">
-          <span class="sup-label">For The Bride</span>
-          <div class="orn-row">
-            <div class="orn-line l"></div>
-            <span class="orn-gem" style="font-size:14px;color:rgba(212,168,67,0.7);">✦</span>
-            <span class="orn-gem">👰</span>
-            <span class="orn-gem" style="font-size:14px;color:rgba(212,168,67,0.7);">✦</span>
-            <div class="orn-line r"></div>
-          </div>
-        </div>
-        <span class="section-icon">🌹</span>
-        <span class="question-label">Sacred Vow</span>
-        <p class="question-text">Jeeva, do you take Thirumurthi<br>as your beloved husband,<br>now and forever?</p>
-        <div class="swash"><span>💖</span><span>✦</span><span>💖</span></div>
-        <div class="btn-group">
-          <button class="btn-yes" onclick="brideYes()">✦ Yes, I Do 💖</button>
-          <button class="btn-no"  onclick="sayNo()">No, I Don't</button>
-        </div>
-      </div>
-    </div>
-    <div class="card-bar-bot"></div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════
-     PAGE 3 — FINAL BLESSING
-══════════════════════════════════════ -->
-<div class="page" id="page3">
-  <div class="card">
-    <div class="card-bar-top"></div>
-    <div class="card-inner">
-      <div class="cc tl"><svg viewBox="0 0 54 54" fill="none"><path d="M4,50 L4,4 L50,4" stroke="rgba(212,168,67,0.3)" stroke-width="1"/><circle cx="4" cy="4" r="2.5" fill="rgba(212,168,67,0.45)"/></svg></div>
-      <div class="cc tr"><svg viewBox="0 0 54 54" fill="none"><path d="M4,50 L4,4 L50,4" stroke="rgba(212,168,67,0.3)" stroke-width="1"/><circle cx="4" cy="4" r="2.5" fill="rgba(212,168,67,0.45)"/></svg></div>
-      <div class="cc bl"><svg viewBox="0 0 54 54" fill="none"><path d="M4,50 L4,4 L50,4" stroke="rgba(212,168,67,0.3)" stroke-width="1"/><circle cx="4" cy="4" r="2.5" fill="rgba(212,168,67,0.45)"/></svg></div>
-      <div class="cc br"><svg viewBox="0 0 54 54" fill="none"><path d="M4,50 L4,4 L50,4" stroke="rgba(212,168,67,0.3)" stroke-width="1"/><circle cx="4" cy="4" r="2.5" fill="rgba(212,168,67,0.45)"/></svg></div>
-
-      <div class="orn-header">
-        <span class="sup-label">United in Love</span>
-        <div class="orn-row">
-          <div class="orn-line l"></div>
-          <span class="orn-gem">🌹</span>
-          <span class="orn-gem" style="font-size:14px;color:rgba(212,168,67,0.7);">✦</span>
-          <span class="orn-gem">❤️‍🔥</span>
-          <span class="orn-gem" style="font-size:14px;color:rgba(212,168,67,0.7);">✦</span>
-          <span class="orn-gem">🌹</span>
-          <div class="orn-line r"></div>
-        </div>
-      </div>
-
-      <div class="blessing-names">Thirumurthi</div>
-      <div class="blessing-ring">
-        <span style="font-size:16px;color:rgba(212,168,67,0.6);">✦</span>
-        <span style="font-size:24px;">💍</span>
-        <span style="font-size:16px;color:rgba(212,168,67,0.6);">✦</span>
-      </div>
-      <div class="blessing-names">Jeeva</div>
-
-      <div class="swash" style="margin:16px 0;"><span>🌸</span><span>💖</span><span>✨</span><span>💖</span><span>🌸</span></div>
-
-      <p class="blessing-text">
-        Today marks the beautiful start of your forever.<br>
-        May every sunrise bring you joy,<br>
-        every dusk bring you peace,<br>
-        and every moment between be filled<br>
-        with <strong>love that grows deeper with time.</strong><br><br>
-        Wishing <strong>Thirumurthi &amp; Jeeva</strong><br>
-        a lifetime of laughter, togetherness &amp; eternal bliss. 🌹✨
+      <p class="promise-question">
+        Are you, <strong>Thirumurthi 💍</strong> and <strong>Jeeva 💖</strong>, ready to<br/>
+        promise your love and cherish<br/>each other forever?
       </p>
 
-      <div class="swash" style="margin-top:22px;"><span>❤️‍🔥</span><span style="font-size:13px;color:rgba(212,168,67,0.6);font-family:'Cinzel Decorative',serif;letter-spacing:5px;font-size:9px;">forever &amp; always</span><span>❤️‍🔥</span></div>
+      <div class="btn-row">
+        <button class="btn-yes" onclick="celebrate()">Yes, Forever 💖</button>
+        <button class="btn-no" onclick="notYet()">Not Yet 😄</button>
+      </div>
     </div>
-    <div class="card-bar-bot"></div>
+
+    <!-- ===== SCREEN 3: Celebration ===== -->
+    <div class="screen" id="screen-celebration">
+      <div class="celebration-badge">✦ Blessed Together ✦</div>
+
+      <span class="rings">💍</span>
+      <div class="celebration-title">Happy Married Life</div>
+
+      <div class="divider">
+        <div class="divider-line"></div>
+        <div class="divider-icon">✦</div>
+        <div class="divider-line"></div>
+      </div>
+
+      <p class="celebration-message">
+        May your journey together be filled with<br/>
+        love, laughter, and endless happiness.
+      </p>
+
+      <div class="names-display">
+        <div class="name-block">
+          <div class="name-big">Thirumurthi</div>
+          <div class="name-role">The Groom 💍</div>
+        </div>
+        <div class="heart-connector">💖</div>
+        <div class="name-block">
+          <div class="name-big">Jeeva</div>
+          <div class="name-role">The Bride 🌸</div>
+        </div>
+      </div>
+
+      <div class="footer-date">✦ &nbsp; Together Forever &nbsp; ✦</div>
+    </div>
+
   </div>
 </div>
 
 <script>
-(function(){
-'use strict';
-
-/* ── CURSOR ── */
-const cursor = document.getElementById('cursor');
-const ring   = document.getElementById('cursor-ring');
-let mx = 0, my = 0;
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  cursor.style.left = mx+'px';
-  cursor.style.top  = my+'px';
-  setTimeout(() => { ring.style.left = mx+'px'; ring.style.top = my+'px'; }, 90);
-});
-
-/* ── PARTICLES ── */
-const COLORS = ['#ff4d6d','#ffd700','#ff6f3c','#ffb6c1','#ff3b6f','#d4a843'];
-const SYMS   = ['❤️','🔥','✨','💖','🌹','✦','💫','🌸'];
-
-for(let i=0;i<90;i++){
-  const p = document.createElement('div');
-  p.className='prt';
-  const sz=Math.random()*8+2;
-  const c=COLORS[Math.floor(Math.random()*COLORS.length)];
-  p.style.cssText=`left:${Math.random()*100}%;width:${sz}px;height:${sz}px;background:${c};box-shadow:0 0 ${sz*4}px ${c};animation-duration:${Math.random()*14+9}s;animation-delay:${Math.random()*12}s;`;
-  document.body.appendChild(p);
-}
-for(let i=0;i<40;i++){
-  const s=document.createElement('div');
-  s.className='sym';
-  const sway=(Math.random()-0.5)*80;
-  s.innerHTML=SYMS[Math.floor(Math.random()*SYMS.length)];
-  s.style.cssText=`left:${Math.random()*100}%;font-size:${Math.random()*18+10}px;animation-duration:${Math.random()*13+9}s;animation-delay:${Math.random()*14}s;--sw:${sway}px;color:rgba(255,${Math.floor(Math.random()*80+100)},${Math.floor(Math.random()*80+80)},0.55);`;
-  document.body.appendChild(s);
-}
-
-/* ── SPARKS ── */
-const SPARK_ICONS = ['✨','🔥','💫','⚡','🌟','❤️','🌹','💖','✦','💎'];
-function firework(cx,cy,count,radius){
-  for(let i=0;i<count;i++){
-    const el=document.createElement('div');
-    el.className='spark';
-    el.innerHTML=SPARK_ICONS[Math.floor(Math.random()*SPARK_ICONS.length)];
-    const a=Math.random()*Math.PI*2;
-    const d=Math.random()*radius+radius*0.25;
-    const dur=(Math.random()*0.8+1.1).toFixed(2)+'s';
-    const rot=(Math.random()*720-360).toFixed(0)+'deg';
-    el.style.cssText=`left:${cx}px;top:${cy}px;font-size:${Math.random()*26+16}px;--tx:${Math.cos(a)*d}px;--ty:${Math.sin(a)*d}px;--tr:${rot};--dur:${dur};`;
-    document.body.appendChild(el);
-    setTimeout(()=>el.remove(), parseFloat(dur)*1000+200);
+  // === Falling petals ===
+  const petalContainer = document.getElementById('petals');
+  for (let i = 0; i < 22; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.top = Math.random() * -60 + 'px';
+    p.style.animationDuration = (6 + Math.random() * 10) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.width = (7 + Math.random() * 10) + 'px';
+    p.style.height = (9 + Math.random() * 12) + 'px';
+    p.style.opacity = 0;
+    const hue = 340 + Math.floor(Math.random() * 20);
+    p.style.background = `radial-gradient(ellipse, hsl(${hue},60%,80%), transparent)`;
+    p.style.transform = `rotate(${Math.random()*360}deg)`;
+    petalContainer.appendChild(p);
   }
-}
-function bigBang(){
-  const cx=window.innerWidth/2, cy=window.innerHeight/2;
-  firework(cx,cy,55,340);
-  setTimeout(()=>firework(cx,cy,40,260),250);
-  setTimeout(()=>firework(cx,cy,30,190),520);
-}
-function gentleBurst(){
-  const cx=window.innerWidth/2, cy=window.innerHeight/2;
-  firework(cx,cy,25,220);
-}
 
-/* periodic ambient sparks */
-setInterval(()=>{
-  const x=Math.random()*window.innerWidth;
-  const y=Math.random()*window.innerHeight;
-  firework(x,y,3,55);
-},3000);
+  // === Eye toggle ===
+  document.getElementById('eyeBtn').addEventListener('click', function() {
+    const inp = document.getElementById('pwInput');
+    inp.type = inp.type === 'password' ? 'text' : 'password';
+  });
 
-/* ── PAGE MANAGEMENT ── */
-let currentPage = 1;
-function switchPage(from, to){
-  const fromEl = document.getElementById('page'+from);
-  const toEl   = document.getElementById('page'+to);
-  fromEl.classList.add('exit');
-  setTimeout(()=>{ fromEl.classList.remove('active','exit'); },1200);
-  setTimeout(()=>{
-    toEl.classList.add('active');
-    currentPage = to;
-    updateDots();
-  },600);
-}
-function updateDots(){
-  for(let i=0;i<3;i++){
-    document.getElementById('dot'+i).classList.toggle('active', i===currentPage-1);
+  // Also allow Enter key
+  document.getElementById('pwInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkPassword();
+  });
+
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    const el = document.getElementById(id);
+    el.classList.add('active');
   }
-}
 
-/* ── PAGE 1: LOGIN ── */
-window.login = function(){
-  const val = document.getElementById('pass').value;
-  if(val === '15.02.2026'){
-    document.getElementById('err1').textContent='';
-    gentleBurst();
-    switchPage(1,2);
-  } else {
-    const err = document.getElementById('err1');
-    err.textContent = '✦  Incorrect Passcode  ✦';
-    const inp = document.getElementById('pass');
-    // shake
-    inp.style.transition='transform 0.07s';
-    ['-8px','8px','-5px','5px','0px'].forEach((v,i)=>{
-      setTimeout(()=>inp.style.transform=`translateX(${v})`, i*70);
-    });
-    setTimeout(()=>{ inp.style.transition=''; }, 420);
+  function checkPassword() {
+    const val = document.getElementById('pwInput').value.trim().toLowerCase();
+    const err = document.getElementById('errorMsg');
+    // Password: "love" — feel free to change
+    if (val === '15.02.2026') {
+      err.classList.remove('show');
+      showScreen('screen-promise');
+    } else {
+      err.classList.add('show');
+      document.getElementById('pwInput').style.borderColor = '#b5617a';
+      setTimeout(() => document.getElementById('pwInput').style.borderColor = '', 1500);
+    }
   }
-};
 
-/* ── PAGE 2: GROOM YES ── */
-window.groomYes = function(){
-  gentleBurst();
-  document.getElementById('groomSection').style.display='none';
-  document.getElementById('brideSection').style.display='block';
-};
+  function celebrate() {
+    showScreen('screen-celebration');
+    launchConfetti();
+  }
 
-/* ── PAGE 2: BRIDE YES → PAGE 3 ── */
-window.brideYes = function(){
-  bigBang();
-  setTimeout(()=>bigBang(),1000);
-  setTimeout(()=>bigBang(),2200);
-  switchPage(2,3);
-};
+  function notYet() {
+    const btn = document.querySelector('.btn-no');
+    const btns = document.querySelector('.btn-row');
+    const positions = [
+      'translateX(60px)', 'translateX(-70px)', 'translateY(-50px)',
+      'translateX(80px) translateY(30px)', 'translateX(-50px) translateY(20px)'
+    ];
+    let i = 0;
+    const dodge = setInterval(() => {
+      btn.style.transform = positions[i % positions.length];
+      i++;
+      if (i > 6) {
+        clearInterval(dodge);
+        btn.style.transform = '';
+        // After teasing, gently push to yes
+        btn.textContent = 'Okay, yes! 😊';
+        btn.classList.remove('btn-no'); btn.classList.add('btn-yes');
+        btn.onclick = celebrate;
+      }
+    }, 400);
+  }
 
-/* ── NO BUTTON ── */
-window.sayNo = function(){
-  /* make the button run away effect */
-  const btn = event.target;
-  const maxX = window.innerWidth  - 120;
-  const maxY = window.innerHeight - 60;
-  btn.style.position='fixed';
-  btn.style.transition='left 0.25s, top 0.25s';
-  btn.style.left = Math.random()*maxX+'px';
-  btn.style.top  = Math.random()*maxY+'px';
-  btn.style.zIndex = '999';
-  btn.textContent = '😅 Catch me!';
-};
-
-/* ── ENTER key on page 1 ── */
-document.getElementById('pass').addEventListener('keydown', e=>{
-  if(e.key==='Enter') window.login();
-});
-
-})();
+  function launchConfetti() {
+    const colors = ['#c9a84c','#e8b4c2','#b5617a','#f7f0df','#d4a855','#f0d0da','#ffffff'];
+    for (let i = 0; i < 80; i++) {
+      const c = document.createElement('div');
+      c.className = 'confetti-piece';
+      c.style.left = (10 + Math.random() * 80) + 'vw';
+      c.style.top = '-20px';
+      c.style.background = colors[Math.floor(Math.random() * colors.length)];
+      c.style.animationDelay = (Math.random() * 2) + 's';
+      c.style.animationDuration = (2.5 + Math.random() * 2) + 's';
+      c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      c.style.width = c.style.height = (5 + Math.random() * 7) + 'px';
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 6000);
+    }
+  }
 </script>
 </body>
 </html>
